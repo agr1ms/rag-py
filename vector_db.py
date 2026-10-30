@@ -8,13 +8,13 @@ collection = chroma_client.get_or_create_collection(collection_name)
 # defining text document here, 3 documents
 documents = [
     {"id":"doc1", "text":"Hi, Agrim!"},
-    {"id":"doc1", "text":"Nice to see you"},
-    {"id":"doc1", "text":"See ya more often!"},
+    {"id":"doc2", "text":"Nice to see you"},
+    {"id":"doc3", "text":"See ya more often!"},
 ]
 
 # adding the documents into our collection. Imp- I am not going to use .add method, instead will use the upsert, as it will make sure that even if we rerun everything, it doesn't continously keep adding the same documents
 for doc in documents:
-    collection.upsert(ids=doc["id"], texts=doc["text"])
+    collection.upsert(ids=doc["id"], documents=[doc["text"]])
 
 # this is the query that we are gonna be passing to chroma DB
 # Then, the chroma db is going to create a little embedding go inside and look for the document that is the most similar
